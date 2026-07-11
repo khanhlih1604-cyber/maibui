@@ -244,7 +244,8 @@ footer p{font-size:13px; color:var(--muted);}
     <a href="#hocduoc" class="side-link" data-target="hocduoc"><span class="side-dot"></span><span class="side-label">Học được</span></a>
     <a href="#tongket" class="side-link" data-target="tongket"><span class="side-dot"></span><span class="side-label">Tổng kết</span></a>
   </nav>
-  <div class="side-drive" style="cursor: pointer;" onclick="window.open('https://drive.google.com/drive/folders/16nTM69t0N-a3Cyb2XqTHcvSARhL7U5KL?usp=drive_link', '_blank')">
+ <!-- Thêm id="btn-drive" và xóa bỏ dòng onclick cũ đi -->
+  <div class="side-drive" id="btn-drive" style="cursor: pointer;">
    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
   </div>
 </aside>
@@ -440,12 +441,11 @@ function setActive(){
 }
 window.addEventListener('scroll', setActive);
 
-// Sửa lại đoạn bắt sự kiện click của bạn thành đoạn này:
+// 1. Xử lý cuộn trang mượt mà cho các menu nội bộ (Tha cho các link ngoài)
 [...sideLinks, ...mobileLinks].forEach(link => {
   link.addEventListener('click', e => {
     const href = link.getAttribute('href');
     
-    // Nếu link bắt đầu bằng dấu # (link nội bộ trong trang) thì mới cuộn mượt
     if (href && href.startsWith('#')) {
       e.preventDefault();
       const target = document.getElementById(href.slice(1));
@@ -453,10 +453,18 @@ window.addEventListener('scroll', setActive);
         window.scrollTo({top: target.offsetTop - 40, behavior: 'smooth'});
       }
     }
-    // Nếu là link ngoài (như Google Drive), nó sẽ tự động mở tab mới bình thường!
   });
 });
 
+// 2. Ép sự kiện mở Google Drive chạy độc lập, bỏ qua mọi bộ lọc chặn của Sidebar
+const btnDrive = document.getElementById('btn-drive');
+if (btnDrive) {
+  btnDrive.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation(); // Ngăn chặn tuyệt đối không cho nổi bọt sự kiện lên các thẻ cha
+    window.open('https://drive.google.com/drive/folders/16nTM69t0N-a3Cyb2XqTHcvSARhL7U5KL?usp=drive_link', '_blank');
+  });
+}
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
 },{threshold:0.15});
