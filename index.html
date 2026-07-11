@@ -440,12 +440,20 @@ function setActive(){
 }
 window.addEventListener('scroll', setActive);
 
-[...sideLinks, ...mobileLinks].forEach(link=>{
-  link.addEventListener('click', e=>{
-    e.preventDefault();
-    const href = link.getAttribute('href') || ('#'+link.dataset.target);
-    const target = document.getElementById(href.slice(1));
-    window.scrollTo({top: target.offsetTop - 40, behavior:'smooth'});
+// Sửa lại đoạn bắt sự kiện click của bạn thành đoạn này:
+[...sideLinks, ...mobileLinks].forEach(link => {
+  link.addEventListener('click', e => {
+    const href = link.getAttribute('href');
+    
+    // Nếu link bắt đầu bằng dấu # (link nội bộ trong trang) thì mới cuộn mượt
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const target = document.getElementById(href.slice(1));
+      if (target) {
+        window.scrollTo({top: target.offsetTop - 40, behavior: 'smooth'});
+      }
+    }
+    // Nếu là link ngoài (như Google Drive), nó sẽ tự động mở tab mới bình thường!
   });
 });
 
