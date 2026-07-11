@@ -162,7 +162,7 @@ section{padding:110px 8vw; max-width:1180px; margin:0 auto; position:relative;}
 .learn-ic{font-size:26px; margin-bottom:14px;}
 .learn-card p{font-size:14px; line-height:1.75; color:var(--muted);}
 
-/* ---------- tổng kết (redesigned) ---------- */
+/* ---------- tổng kết ---------- */
 .summary-quote{font-family:'Baloo 2'; font-size:clamp(20px,2.6vw,27px); font-weight:700; line-height:1.6; color:var(--ink); max-width:760px; margin-bottom:50px;}
 .summary-quote em{color:var(--accent-deep); font-style:normal;}
 
@@ -454,32 +454,34 @@ const io = new IntersectionObserver((entries)=>{
 },{threshold:0.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
+// ĐÃ CẬP NHẬT NỘI DUNG MỚI TẠI ĐÂY
 const exercises = [
-  {t:"Thao tác cơ bản với tệp tin và thư mục",
-   goal:"Xây dựng thói quen tổ chức dữ liệu cá nhân khoa học, dễ tìm kiếm và sao lưu an toàn.",
-   result:"Thiết lập hệ thống thư mục rõ ràng theo môn học/dự án, đặt tên tệp nhất quán và sao lưu định kỳ.",
+  {t:"BÀI 1: Máy tính và các thiết bị ngoại vi",
+   goal:"Quản trị không gian máy tính cá nhân một cách khoa học, bảo mật tốt dữ liệu học tập và tối ưu hóa hệ điều hành để phục vụ nghiên cứu lâu dài.",
+   result:"Tổ chức hệ thống học liệu theo sơ đồ cấu trúc rõ ràng, thực hành các thao tác di chuyển, xóa, phục hồi dữ liệu và khai thác phím tắt để nâng cao tốc độ làm việc.",
    link:"#"},
-  {t:"Tìm kiếm và đánh giá thông tin học thuật",
-   goal:"Biết khai thác các nguồn học thuật uy tín và đánh giá độ tin cậy của thông tin trước khi sử dụng.",
-   result:"Thành thạo tra cứu trên cơ sở dữ liệu học thuật và áp dụng tiêu chí đánh giá nguồn vào bài tập thực tế.",
+  {t:"BÀI 2: Khai thác dữ liệu và thông tin",
+   goal:"Hình thành tư duy phản biện khi nghiên cứu, biết cách định vị và chọn lọc các nguồn học liệu ngôn ngữ và văn hóa uy tín trên mạng.",
+   result:"Áp dụng các toán tử nâng cao để tối ưu hóa công cụ tìm kiếm, tiến hành đối chiếu chéo thông tin từ nhiều nguồn tài liệu để đảm bảo tính xác thực.",
    link:"#"},
-  {t:"Viết Prompt hiệu quả cho các tác vụ học tập",
-   goal:"Rèn luyện kỹ năng đặt câu hỏi rõ ràng, có ngữ cảnh để khai thác AI phục vụ học tập.",
-   result:"Xây dựng được bộ prompt mẫu cho nhiều tình huống học tập, cải thiện rõ rệt chất lượng phản hồi từ AI.",
+  {t:"BÀI 3: Tổng quan về trí tuệ nhân tạo",
+   goal:"Chủ động điều phối các mô hình ngôn ngữ lớn, ứng dụng AI như một trợ lý chuyên gia để hỗ trợ dịch thuật, phân tích ngữ pháp và làm rõ ngữ cảnh.",
+   result:"Thử nghiệm thiết lập các chuỗi lệnh chi tiết để khai thác tối đa độ chính xác từ câu trả lời của AI.",
    link:"#"},
-  {t:"Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm",
-   goal:"Phối hợp hiệu quả với nhóm qua các nền tảng trực tuyến, quản lý tiến độ minh bạch.",
-   result:"Áp dụng thành công công cụ cộng tác để phân chia công việc, theo dõi deadline và lưu trữ tài liệu nhóm.",
+  {t:"BÀI 4: Giao tiếp và hợp tác trong môi trường số",
+   goal:"Nâng cao năng lực làm việc nhóm từ xa, làm chủ các quy trình kết nối và đồng bộ thông tin trên các nền tảng số.",
+   result:"Khởi tạo và quản trị không gian làm việc trên điện toán đám mây, phân chia các hạng mục công việc cụ thể và cùng cộng tác chỉnh sửa tài liệu theo thời gian thực.",
    link:"#"},
-  {t:"Sử dụng AI tạo sinh để hỗ trợ sáng tạo nội dung",
-   goal:"Kết hợp AI tạo sinh vào quy trình sáng tạo mà vẫn giữ được dấu ấn cá nhân.",
-   result:"Tạo ra sản phẩm nội dung hoàn chỉnh có hỗ trợ của AI, đồng thời tinh chỉnh phù hợp phong cách riêng.",
+  {t:"BÀI 5: Sáng tạo nội dung số",
+   goal:"Phát triển tư duy thẩm mỹ thị giác, học cách chuyển hóa kiến thức ngôn ngữ học thuật thành các sản phẩm truyền thông trực quan và thu hút.",
+   result:"Phối hợp các công cụ AI tạo sinh để xây dựng ý tưởng, lên kịch bản nội dung và tự tay hoàn thiện sản phẩm Infographic với bố cục phân tầng mạch lạc.",
    link:"#"},
-  {t:"Sử dụng AI có trách nhiệm trong học tập và nghiên cứu",
-   goal:"Nhận diện giới hạn của AI và sử dụng công cụ này một cách liêm chính trong học thuật.",
-   result:"Hình thành thói quen kiểm chứng thông tin do AI cung cấp và trích dẫn nguồn hỗ trợ một cách minh bạch.",
+  {t:"BÀI 6: An toàn và liêm chính học thuật trong môi trường số",
+   goal:"Xây dựng đạo đức sử dụng công nghệ có trách nhiệm, bảo vệ quyền sở hữu trí tuệ của bản thân và tôn trọng chất xám của người khác.",
+   result:"Rà soát và đánh giá các sản phẩm cá nhân theo quy chuẩn ứng xử AI của ĐHQGHN, thực hành kỹ thuật trích dẫn nguồn minh bạch và kiểm chuẩn độ chính trực cho tài liệu.",
    link:"#"},
 ];
+
 const list = document.getElementById('exList');
 exercises.forEach((ex,i)=>{
   const item = document.createElement('div');
@@ -490,11 +492,12 @@ exercises.forEach((ex,i)=>{
       <div class="ex-title">${ex.t}</div>
       <div class="ex-chips">
         <div class="ex-chip goal"><div class="chip-label">🎯 Mục tiêu</div><p>${ex.goal}</p></div>
-        <div class="ex-chip result"><div class="chip-label">✅ Kết quả đạt được</div><p>${ex.result}</p></div>
+        <div class="ex-chip result"><div class="chip-label">✅ Quá trình thực hiện</div><p>${ex.result}</p></div>
       </div>
+      <!-- Thay đổi liên kết dẫn thành "xem báo cáo" -->
       <a href="${ex.link}" target="_blank" rel="noopener" class="ex-drive">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-        Xem trên Google Drive
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+        Xem báo cáo
       </a>
     </div>`;
   list.appendChild(item);
