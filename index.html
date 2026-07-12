@@ -92,7 +92,7 @@ section{padding:110px 8vw; max-width:1180px; margin:0 auto; position:relative;}
 .avatar-wrap{display:flex; justify-content:center;}
 .avatar-frame{position:relative; width:290px; height:290px;}
 .avatar-blob{
-  width:100%; height:100%; border-radius:44% 56% 62% 38% / 45% 40% 60% 55%;
+  width:100%; height:100%; border-radius:32px;
   background:linear-gradient(150deg,var(--accent-soft),var(--peach));
   display:flex; align-items:center; justify-content:center; overflow:hidden;
   box-shadow: var(--shadow); border:6px solid var(--card);
@@ -142,19 +142,44 @@ section{padding:110px 8vw; max-width:1180px; margin:0 auto; position:relative;}
 }
 .intro-note b{color:var(--ink);}
 
-/* ---------- bài tập ---------- */
-.ex-list{display:flex; flex-direction:column; gap:20px;}
-.ex-item{display:grid; grid-template-columns:64px 1fr; gap:22px; background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:26px 30px; box-shadow:var(--shadow);}
-.ex-circle{width:52px; height:52px; border-radius:16px; background:linear-gradient(135deg,var(--accent),var(--accent-deep)); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Baloo 2'; font-weight:800; font-size:15px;}
-.ex-title{font-size:17.5px; font-weight:700; margin-bottom:14px;}
-.ex-chips{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-.ex-chip{border-radius:14px; padding:14px 16px;}
-.ex-chip.goal{background:var(--accent-soft);}
-.ex-chip.result{background:var(--mint);}
-.chip-label{font-size:11.5px; font-weight:800; margin-bottom:6px; color:var(--ink);}
-.ex-chip p{font-size:13.5px; line-height:1.7; color:#5b5030;}
-.ex-drive{display:inline-flex; align-items:center; gap:8px; margin-top:16px; font-size:13px; font-weight:700; color:var(--accent-deep); text-decoration:none;}
-.ex-drive svg{width:17px; height:17px;}
+/* ---------- bài tập (carousel layout) ---------- */
+.ex-subtitle{text-align:center; max-width:560px; margin:10px auto 0; color:var(--muted); font-size:15px;}
+.carousel-wrap{position:relative;}
+.carousel{
+  display:flex; gap:22px; overflow-x:auto; scroll-snap-type:x mandatory; padding:10px 4px 26px;
+  scrollbar-width:thin; scrollbar-color:var(--accent) transparent;
+}
+.carousel::-webkit-scrollbar{height:8px;}
+.carousel::-webkit-scrollbar-thumb{background:var(--accent); border-radius:999px;}
+.c-card{
+  flex:0 0 300px; scroll-snap-align:start; background:var(--card); border-radius:var(--radius);
+  padding:24px 22px; box-shadow:var(--shadow); border:1px solid var(--line); position:relative;
+  transition:transform .4s cubic-bezier(.2,.9,.3,1.3);
+}
+.c-card:hover{transform:translateY(-8px);}
+.c-card .c-num{
+  width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent-deep));
+  color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Baloo 2'; font-weight:800;
+  margin-bottom:12px;
+}
+.c-card .c-tag{position:absolute; top:22px; right:20px; font-size:10.5px; font-weight:800; padding:4px 11px; border-radius:999px; background:var(--accent-soft); color:var(--accent-deep);}
+.c-card h3{margin:0 0 12px; color:var(--ink); font-size:16.5px; line-height:1.4; font-family:'Baloo 2'; font-weight:700;}
+.c-goal{display:flex; flex-direction:column; gap:8px; margin:0 0 14px;}
+.c-goal .row{display:flex; gap:7px; align-items:flex-start; padding:9px 11px; border-radius:12px; background:var(--accent-soft); font-size:13px; line-height:1.55; color:#5b5030;}
+.c-goal .row.result{background:var(--mint);}
+.c-goal .row b{color:var(--ink);}
+.c-card .drive-btn{
+  display:inline-flex; align-items:center; gap:7px; padding:8px 16px; border-radius:999px; font-size:12.5px; font-weight:700;
+  background:linear-gradient(120deg,var(--accent),var(--accent-deep)); color:#fff; text-decoration:none;
+}
+.c-card .drive-btn svg{width:15px; height:15px;}
+.carousel-nav{display:flex; justify-content:center; gap:14px; margin-top:4px;}
+.c-arrow{
+  width:44px; height:44px; border-radius:50%; border:none; cursor:pointer; font-size:17px;
+  background:var(--card); color:var(--accent-deep); box-shadow:var(--shadow);
+  transition:transform .3s ease, background .3s ease, color .3s ease;
+}
+.c-arrow:hover{transform:scale(1.1); background:linear-gradient(120deg,var(--accent),var(--accent-deep)); color:#fff;}
 
 /* ---------- học được ---------- */
 .learn-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
@@ -205,8 +230,6 @@ footer p{font-size:13px; color:var(--muted);}
   .hero-meta{justify-content:center;}
   .avatar-wrap{order:-1;}
   .intro-grid{grid-template-columns:1fr;}
-  .ex-item{grid-template-columns:1fr;}
-  .ex-chips{grid-template-columns:1fr;}
   .learn-grid{grid-template-columns:1fr 1fr;}
   .reflect-timeline{grid-template-columns:1fr;}
 }
@@ -251,7 +274,7 @@ footer p{font-size:13px; color:var(--muted);}
 </aside>
 
 <div class="mobile-nav">
-  <div class="m-logo">NM</div>
+  <div class="m-logo">MB</div>
   <ul>
     <li><a href="#gioithieu" class="m-link active">Giới thiệu</a></li>
     <li><a href="#baitap" class="m-link">Bài tập</a></li>
@@ -354,8 +377,15 @@ footer p{font-size:13px; color:var(--muted);}
     <div class="section-head reveal">
       <div class="tag">Bài tập</div>
       <h2 class="section-title">Sáu bài thực hành — mục tiêu &amp; kết quả</h2>
+      <p class="ex-subtitle">Trượt ngang để xem hết các bài thực hành mình đã hoàn thành nhé</p>
     </div>
-    <div class="ex-list" id="exList"></div>
+    <div class="carousel-wrap reveal">
+      <div class="carousel" id="exList"></div>
+      <div class="carousel-nav">
+        <button class="c-arrow" id="exPrev">←</button>
+        <button class="c-arrow" id="exNext">→</button>
+      </div>
+    </div>
   </section>
 
   <section id="hocduoc">
@@ -501,24 +531,31 @@ const exercises = [
 const list = document.getElementById('exList');
 exercises.forEach((ex,i)=>{
   const item = document.createElement('div');
-  item.className = 'ex-item reveal';
+  item.className = 'c-card reveal';
   item.innerHTML = `
-    <div class="ex-circle">${String(i+1).padStart(2,'0')}</div>
-    <div>
-      <div class="ex-title">${ex.t}</div>
-      <div class="ex-chips">
-        <div class="ex-chip goal"><div class="chip-label">🎯 Mục tiêu</div><p>${ex.goal}</p></div>
-        <div class="ex-chip result"><div class="chip-label">✅ Quá trình thực hiện</div><p>${ex.result}</p></div>
-      </div>
-      <!-- Thay đổi liên kết dẫn thành "xem báo cáo" -->
-      <a href="${ex.link}" target="_blank" rel="noopener" class="ex-drive">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-        Xem báo cáo
-      </a>
-    </div>`;
+    <span class="c-tag">Bài ${i+1}</span>
+    <div class="c-num">${i+1}</div>
+    <h3>${ex.t}</h3>
+    <div class="c-goal">
+      <div class="row"><b>🎯 Mục tiêu:</b> ${ex.goal}</div>
+      <div class="row result"><b>✅ Quá trình thực hiện:</b> ${ex.result}</div>
+    </div>
+    <a href="${ex.link}" target="_blank" rel="noopener" class="drive-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+      Xem báo cáo
+    </a>`;
   list.appendChild(item);
   io.observe(item);
 });
+
+// Điều hướng carousel bằng nút mũi tên
+const exCarousel = document.getElementById('exList');
+const exPrev = document.getElementById('exPrev');
+const exNext = document.getElementById('exNext');
+if(exPrev && exNext && exCarousel){
+  exPrev.addEventListener('click', ()=> exCarousel.scrollBy({left:-320, behavior:'smooth'}));
+  exNext.addEventListener('click', ()=> exCarousel.scrollBy({left:320, behavior:'smooth'}));
+}
 
 // ---------- Animated airy pastel-yellow wash background ----------
 const canvas = document.getElementById('wash');
